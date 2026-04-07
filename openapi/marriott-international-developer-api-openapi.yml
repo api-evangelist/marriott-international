@@ -11,10 +11,10 @@ info:
 servers:
   - url: https://devportalprod.marriott.com
 tags:
-  - name: Properties
-    description: Search and retrieve hotel property information.
   - name: Availability
     description: Check room availability and rates.
+  - name: Properties
+    description: Search and retrieve hotel property information.
   - name: Reservations
     description: Create and manage hotel reservations.
 paths:

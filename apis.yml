@@ -1,16 +1,14 @@
 aid: marriott-international
-url: 
-  https://raw.githubusercontent.com/api-evangelist/marriott-international/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/marriott-international/refs/heads/main/apis.yml
 apis:
   - aid: marriott-international:developer-api
     name: Marriott Developer API
     tags:
-      - Hotels
       - Hospitality
+      - Hotels
       - Reservations
       - Travel
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://devportalprod.marriott.com
     humanURL: https://devportalprod.marriott.com/
     properties:
