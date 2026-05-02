@@ -1,4 +1,6 @@
 aid: marriott-international
+name: Marriott International
+modified: '2026-04-28'
 url: https://raw.githubusercontent.com/api-evangelist/marriott-international/refs/heads/main/apis.yml
 apis:
   - aid: marriott-international:developer-api
