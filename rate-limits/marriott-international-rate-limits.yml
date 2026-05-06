@@ -4,79 +4,56 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Marriott International
 providerId: marriott-international
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
+  - Hospitality
+  - Hotels
+  - Travel
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Marriott International API surface. Captures
-  per-tier quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values
-  to be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: Marriott International's developer portal is partner-gated; rate limits are configured per
+  partner contract and surfaced inside the portal rather than on a public docs page. There are no publicly
+  documented per-second or per-minute ceilings for the Marriott Developer API. Real-time availability
+  and shopping APIs typically have higher limits than booking and modify endpoints, and look-to-book ratios
+  are monitored as part of partner conduct.
+notes: |
+  No public RPS / RPM numbers published. Set reconciled=true once a partner agreement's documented
+  ceilings can be referenced.
+sources:
+  - https://developer.marriott.com/
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
+  - name: Partner-scoped API limit
+    scope: partner
+    metric: varies
+    limit: 'partner-specific; configured in developer portal'
     applies:
       - Marriott Developer API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
+    notes: Limits are configured per signed partner and visible in the developer portal; consumers should
+      consult their connectivity contact for the agreed ceiling.
+  - name: Shopping / availability surge
+    scope: partner/endpoint
+    metric: varies
+    limit: 'subject to look-to-book ratio enforcement'
     applies:
       - Marriott Developer API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Marriott Developer API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Marriott Developer API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Marriott Developer API
+    notes: Distribution partners are expected to maintain a healthy look-to-book ratio; sustained shopping
+      traffic without bookings may trigger commercial review and rate reduction.
 policies:
   - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
+    description: Clients receiving 429 should implement exponential backoff with jitter and honor Retry-After
       when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
-maintainers: []
+  - name: Look-to-Book Discipline
+    description: Distribution partners are contractually expected to keep look-to-book ratios within agreed
+      bounds; abusive shopping traffic without conversion can lead to rate reduction or contract review.
+  - name: Idempotency
+    description: Use unique idempotency / external transaction IDs on booking and modify operations to
+      safely retry across timeouts without creating duplicate reservations.
+  - name: Partner-Specific Allowances
+    description: Loyalty, corporate, and group partners may receive different limits than leisure / OTA
+      partners; consult the contract for the applicable ceiling.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

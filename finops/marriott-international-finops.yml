@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,28 +9,42 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Marriott International
 providerId: marriott-international
-publisherName: Marriott International
-serviceCategory: API
+publisherName: Marriott International, Inc.
+serviceCategory: Hospitality Distribution API
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
+  - Hospitality
+  - Hotels
+  - Travel
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the Marriott International API surface. Provides a FOCUS-aligned
-  mapping for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
+description: 'FOCUS-aligned FinOps shape for Marriott International: distribution / connectivity API
+  consumed under partner agreements. Cost is realized at the booking level (commission per stay) rather
+  than at the per-API-call level, so meters track look-to-book efficiency alongside booking volume.'
+notes: |
+  No public per-API-call pricing exists. The economic unit for Marriott distribution is the booked / stayed
+  reservation; API call volume is governed by partner contract rather than directly billed.
+sources:
+  - https://developer.marriott.com/
+  - https://www.marriott.com/marriott/aboutmarriott.mi
 principles:
   - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
+    description: Reconcile partner production metrics (shopping calls, bookings created, stayed nights)
+      against the partner's monthly / quarterly distribution invoice. Monitor the look-to-book ratio
+      surfaced in the developer portal.
   - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
+    description: Allocate distribution cost by channel (leisure OTA, corporate, GDS, loyalty), brand,
+      and geographic market. Tag external transaction IDs with internal channel / campaign identifiers
+      at booking time to support chargeback to product or marketing teams.
   - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
+    description: Reduce wasted shopping traffic via cache and short-TTL availability storage, defer
+      non-revenue-impacting modify calls, and consolidate connections through a single distribution
+      gateway where commercially viable.
   - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
+    description: Assign a connectivity owner who reviews look-to-book ratios, dispute volume, and commission
+      reconciliation each month with Marriott's distribution team.
 domains:
   - name: Understand Usage and Cost
     capabilities:
@@ -42,70 +57,70 @@ domains:
       - Planning and Estimating
       - Forecasting
       - Budgeting
-      - Benchmarking
       - Unit Economics
   - name: Optimize Usage and Cost
     capabilities:
-      - Architecting for Cloud
       - Rate Optimization
       - Workload Optimization
-      - Cloud Sustainability
       - Licensing and SaaS
   - name: Manage the FinOps Practice
     capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
       - Invoicing and Chargeback
       - Onboarding Workloads
-      - Intersecting Disciplines
 billingModel:
-  pricingCategory: Usage-Based
+  pricingCategory: Partner Commission (Per-Booking / Per-Stayed-Night)
   billingFrequency: Monthly
-  billingCurrency: USD
+  billingCurrency: USD (settlement varies)
   chargeCategories:
     - Usage
-    - Purchase
-    - Tax
-    - Credit
     - Adjustment
+    - Credit
   chargeFrequency: Recurring
 focusColumns:
-  ServiceName: Marriott International
-  ServiceCategory: Developer Tools / API
+  ServiceName: Marriott Developer API
+  ServiceCategory: Hospitality Distribution
   ProviderName: Marriott International
-  PublisherName: Marriott International
-  InvoiceIssuerName: Marriott International
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: Marriott International, Inc.
+  InvoiceIssuerName: Marriott International, Inc.
   BillingCurrency: USD
   ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
+  - name: shopping_requests
+    description: Availability / shopping requests submitted by the partner.
     unit: request
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+      - partner
+      - brand
+      - market
+      - channel
+  - name: bookings_created
+    description: Reservations successfully created via the API.
+    unit: booking
     aggregation: sum
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
+      - partner
+      - brand
+      - property
+      - channel
+  - name: stayed_nights
+    description: Nights actually stayed (post-arrival), the unit on which most distribution commission
+      is settled.
+    unit: room-night
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
+      - partner
+      - brand
+      - property
+      - rate_plan
+  - name: commission_settled
+    description: Commission paid by Marriott to the distribution partner (or vice versa, per contract).
+    unit: USD
+    aggregation: sum
+    dimensions:
+      - partner
+      - brand
+      - market
 apis:
   - name: Marriott Developer API
     baseURL: https://devportalprod.marriott.com
@@ -117,10 +132,12 @@ apis:
     serviceName: Marriott Developer API
     serviceCategory: API
 unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
+  - name: Look-to-Book Ratio
+    metric: shopping_requests / bookings_created
+    target: contractual ceiling
+  - name: Commission per Stayed Night
+    metric: commission_settled / stayed_nights
     target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
-maintainers: []
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
