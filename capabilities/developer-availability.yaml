@@ -1,0 +1,100 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marriott Developer API — Availability
+  description: 'Marriott Developer API — Availability. 1 operations. Lead operation: Check room availability. Self-contained
+    Naftiko capability covering one Marriott International business surface.'
+  tags:
+  - Marriott International
+  - Availability
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MARRIOTT_INTERNATIONAL_API_KEY: MARRIOTT_INTERNATIONAL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: developer-availability
+    baseUri: https://devportalprod.marriott.com
+    description: Marriott Developer API — Availability business capability. Self-contained, no shared references.
+    resources:
+    - name: availability
+      path: /availability
+      operations:
+      - name: checkavailability
+        method: GET
+        description: Check room availability
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: propertyId
+          in: query
+          type: string
+          description: The unique property identifier.
+          required: true
+        - name: checkIn
+          in: query
+          type: string
+          description: Check-in date.
+          required: true
+        - name: checkOut
+          in: query
+          type: string
+          description: Check-out date.
+          required: true
+        - name: guests
+          in: query
+          type: integer
+          description: Number of guests.
+    authentication:
+      type: bearer
+      token: '{{env.MARRIOTT_INTERNATIONAL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: developer-availability-rest
+    port: 8080
+    description: REST adapter for Marriott Developer API — Availability. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/availability
+      name: availability
+      description: REST surface for availability.
+      operations:
+      - method: GET
+        name: checkavailability
+        description: Check room availability
+        call: developer-availability.checkavailability
+        with:
+          propertyId: rest.propertyId
+          checkIn: rest.checkIn
+          checkOut: rest.checkOut
+          guests: rest.guests
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: developer-availability-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Marriott Developer API — Availability. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: check-room-availability
+      description: Check room availability
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: developer-availability.checkavailability
+      with:
+        propertyId: tools.propertyId
+        checkIn: tools.checkIn
+        checkOut: tools.checkOut
+        guests: tools.guests
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,133 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marriott Developer API — Properties
+  description: 'Marriott Developer API — Properties. 2 operations. Lead operation: Search properties. Self-contained Naftiko
+    capability covering one Marriott International business surface.'
+  tags:
+  - Marriott International
+  - Properties
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MARRIOTT_INTERNATIONAL_API_KEY: MARRIOTT_INTERNATIONAL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: developer-properties
+    baseUri: https://devportalprod.marriott.com
+    description: Marriott Developer API — Properties business capability. Self-contained, no shared references.
+    resources:
+    - name: properties
+      path: /properties
+      operations:
+      - name: searchproperties
+        method: GET
+        description: Search properties
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: location
+          in: query
+          type: string
+          description: City or geographic location to search.
+        - name: brand
+          in: query
+          type: string
+          description: Filter by Marriott brand code.
+        - name: radius
+          in: query
+          type: number
+          description: Search radius in miles.
+    - name: properties-propertyId
+      path: /properties/{propertyId}
+      operations:
+      - name: getproperty
+        method: GET
+        description: Get property details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: propertyId
+          in: path
+          type: string
+          description: The unique property identifier.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.MARRIOTT_INTERNATIONAL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: developer-properties-rest
+    port: 8080
+    description: REST adapter for Marriott Developer API — Properties. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/properties
+      name: properties
+      description: REST surface for properties.
+      operations:
+      - method: GET
+        name: searchproperties
+        description: Search properties
+        call: developer-properties.searchproperties
+        with:
+          location: rest.location
+          brand: rest.brand
+          radius: rest.radius
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/properties/{propertyid}
+      name: properties-propertyid
+      description: REST surface for properties-propertyId.
+      operations:
+      - method: GET
+        name: getproperty
+        description: Get property details
+        call: developer-properties.getproperty
+        with:
+          propertyId: rest.propertyId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: developer-properties-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Marriott Developer API — Properties. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: search-properties
+      description: Search properties
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: developer-properties.searchproperties
+      with:
+        location: tools.location
+        brand: tools.brand
+        radius: tools.radius
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-property-details
+      description: Get property details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: developer-properties.getproperty
+      with:
+        propertyId: tools.propertyId
+      outputParameters:
+      - type: object
+        mapping: $.
