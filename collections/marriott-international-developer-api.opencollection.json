@@ -1,0 +1,155 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Marriott Developer API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Properties",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://devportalprod.marriott.com/properties",
+            "params": [
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "City or geographic location to search."
+              },
+              {
+                "name": "brand",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Marriott brand code."
+              },
+              {
+                "name": "radius",
+                "value": "",
+                "type": "query",
+                "description": "Search radius in miles."
+              }
+            ]
+          },
+          "docs": "Search for Marriott hotel properties by location, brand, amenities, and other criteria across the global portfolio."
+        },
+        {
+          "info": {
+            "name": "Get property details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://devportalprod.marriott.com/properties/:propertyId",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique property identifier."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific Marriott hotel property including amenities, location, and contact details."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Availability",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check room availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://devportalprod.marriott.com/availability",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "query",
+                "description": "The unique property identifier."
+              },
+              {
+                "name": "checkIn",
+                "value": "",
+                "type": "query",
+                "description": "Check-in date."
+              },
+              {
+                "name": "checkOut",
+                "value": "",
+                "type": "query",
+                "description": "Check-out date."
+              },
+              {
+                "name": "guests",
+                "value": "",
+                "type": "query",
+                "description": "Number of guests."
+              }
+            ]
+          },
+          "docs": "Check room availability and rates for a specified property and date range."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reservations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://devportalprod.marriott.com/reservations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new hotel reservation at a specified Marriott property."
+        },
+        {
+          "info": {
+            "name": "Get reservation details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://devportalprod.marriott.com/reservations/:confirmationNumber",
+            "params": [
+              {
+                "name": "confirmationNumber",
+                "value": "",
+                "type": "path",
+                "description": "The reservation confirmation number."
+              }
+            ]
+          },
+          "docs": "Retrieves details of a specific reservation by confirmation number."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

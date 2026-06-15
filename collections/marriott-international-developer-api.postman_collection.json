@@ -1,0 +1,477 @@
+{
+  "item": [
+    {
+      "id": "081a8fe5-f694-45be-8ec7-2ce76ace3402",
+      "name": "Availability",
+      "description": {
+        "content": "Check room availability and rates.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8046eb01-c265-49d1-99d0-fd561d06c24f",
+          "name": "Check room availability",
+          "request": {
+            "name": "Check room availability",
+            "description": {
+              "content": "Check room availability and rates for a specified property and date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "availability"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "propertyId",
+                  "value": "<string>",
+                  "description": "(Required) The unique property identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "checkIn",
+                  "value": "<date>",
+                  "description": "(Required) Check-in date."
+                },
+                {
+                  "disabled": false,
+                  "key": "checkOut",
+                  "value": "<date>",
+                  "description": "(Required) Check-out date."
+                },
+                {
+                  "disabled": false,
+                  "key": "guests",
+                  "value": "<integer>",
+                  "description": "Number of guests."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3e96da95-f951-4835-979f-3bae56ec6b7e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "propertyId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "checkIn",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "checkOut",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "guests",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "e9c76bee-fa92-4f8b-a0f6-a22d91af6f87",
+      "name": "Properties",
+      "description": {
+        "content": "Search and retrieve hotel property information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4924d32d-0c73-45df-82ac-fb30e3e92894",
+          "name": "Search properties",
+          "request": {
+            "name": "Search properties",
+            "description": {
+              "content": "Search for Marriott hotel properties by location, brand, amenities, and other criteria across the global portfolio.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "properties"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<string>",
+                  "description": "City or geographic location to search."
+                },
+                {
+                  "disabled": false,
+                  "key": "brand",
+                  "value": "<string>",
+                  "description": "Filter by Marriott brand code."
+                },
+                {
+                  "disabled": false,
+                  "key": "radius",
+                  "value": "<number>",
+                  "description": "Search radius in miles."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a5de2b65-c636-4fe8-b362-56bb7be2a231",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "properties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "brand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc463055-92a9-41ba-9b1f-e746001e632c",
+          "name": "Get property details",
+          "request": {
+            "name": "Get property details",
+            "description": {
+              "content": "Retrieves detailed information about a specific Marriott hotel property including amenities, location, and contact details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "properties",
+                ":propertyId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "propertyId",
+                  "description": "(Required) The unique property identifier."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "937850c3-6279-47b3-8906-d79a984e55b0",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "properties",
+                    ":propertyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "propertyId",
+                      "description": "(Required) The unique property identifier."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "05875f6e-d5a0-422e-a612-e5162bda17ef",
+      "name": "Reservations",
+      "description": {
+        "content": "Create and manage hotel reservations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "40f6b759-2fd2-42c4-a2fd-9732265a46ad",
+          "name": "Create a reservation",
+          "request": {
+            "name": "Create a reservation",
+            "description": {
+              "content": "Creates a new hotel reservation at a specified Marriott property.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reservations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"propertyId\": \"<string>\",\n  \"checkIn\": \"<date>\",\n  \"checkOut\": \"<date>\",\n  \"roomType\": \"<string>\",\n  \"guestName\": \"<string>\",\n  \"guests\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a824d690-e978-4438-9c19-a1948459dc06",
+              "name": "Reservation created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"propertyId\": \"<string>\",\n  \"checkIn\": \"<date>\",\n  \"checkOut\": \"<date>\",\n  \"roomType\": \"<string>\",\n  \"guestName\": \"<string>\",\n  \"guests\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70f6b294-a945-483b-a2c0-5a893b1d012a",
+          "name": "Get reservation details",
+          "request": {
+            "name": "Get reservation details",
+            "description": {
+              "content": "Retrieves details of a specific reservation by confirmation number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reservations",
+                ":confirmationNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "confirmationNumber",
+                  "description": "(Required) The reservation confirmation number."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "711c6a4d-012b-4260-b951-65b85778811a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    ":confirmationNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "confirmationNumber",
+                      "description": "(Required) The reservation confirmation number."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://devportalprod.marriott.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7ea454b3-ca5b-4c9f-b8b6-c546a4e2c9aa",
+    "name": "Marriott Developer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Marriott Developer API provides programmatic access to Marriott International's hotel and property systems. The API enables integration with Marriott's Central Reservation System for property search, availability lookup, and booking management across Marriott's portfolio of hotel brands worldwide.",
+      "type": "text/plain"
+    }
+  }
+}
