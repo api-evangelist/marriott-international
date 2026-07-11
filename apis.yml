@@ -5,6 +5,12 @@ name: Marriott International
 modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/marriott-international/refs/heads/main/apis.yml
 common:
+  - type: VulnerabilityDisclosure
+    url: security/marriott-international-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/marriott-international-domain-security.yml
+  - type: Authentication
+    url: authentication/marriott-international-authentication.yml
   - type: OAuthScopes
     url: scopes/marriott-international-scopes.yml
   - type: LinkedIn
