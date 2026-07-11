@@ -1,0 +1,22 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/marriott-international-developer-api-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/marriott-international-developer-api-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://devportalprod.marriott.com/oauth/token
+scopes:
+- scope: properties:read
+  description: Read property information
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/marriott-international-developer-api-openapi.yml
+- scope: reservations:write
+  description: Create and manage reservations
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/marriott-international-developer-api-openapi.yml

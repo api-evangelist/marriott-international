@@ -5,6 +5,8 @@ name: Marriott International
 modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/marriott-international/refs/heads/main/apis.yml
 common:
+  - type: OAuthScopes
+    url: scopes/marriott-international-scopes.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/marriott-international
 apis:
