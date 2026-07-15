@@ -5,6 +5,8 @@ name: Marriott International
 modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/marriott-international/refs/heads/main/apis.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/marriott-international-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/marriott-international-vulnerability-disclosure.yml
   - type: DomainSecurity
