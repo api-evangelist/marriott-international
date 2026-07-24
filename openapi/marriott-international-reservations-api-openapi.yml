@@ -1,0 +1,73 @@
+openapi: 3.1.0
+info:
+  title: Marriott Developer Availability Reservations API
+  description: The Marriott Developer API provides programmatic access to Marriott International's hotel and property systems. The API enables integration with Marriott's Central Reservation System for property search, availability lookup, and booking management across Marriott's portfolio of hotel brands worldwide.
+  version: '1.0'
+servers:
+- url: https://devportalprod.marriott.com
+tags:
+- name: Reservations
+  description: Create and manage hotel reservations.
+paths:
+  /reservations:
+    post:
+      operationId: createReservation
+      summary: Create a reservation
+      description: Creates a new hotel reservation at a specified Marriott property.
+      tags:
+      - Reservations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                propertyId:
+                  type: string
+                checkIn:
+                  type: string
+                  format: date
+                checkOut:
+                  type: string
+                  format: date
+                roomType:
+                  type: string
+                guestName:
+                  type: string
+                guests:
+                  type: integer
+      responses:
+        '201':
+          description: Reservation created successfully
+  /reservations/{confirmationNumber}:
+    get:
+      operationId: getReservation
+      summary: Get reservation details
+      description: Retrieves details of a specific reservation by confirmation number.
+      tags:
+      - Reservations
+      parameters:
+      - name: confirmationNumber
+        in: path
+        required: true
+        description: The reservation confirmation number.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://devportalprod.marriott.com/oauth/token
+          scopes:
+            properties:read: Read property information
+            reservations:write: Create and manage reservations
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
