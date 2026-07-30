@@ -1,4 +1,18 @@
 aid: marriott-international
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/marriott-international.png
 tags:
   - Fortune 500
 name: Marriott International
@@ -18,26 +32,42 @@ common:
   - type: LinkedIn
     url: https://www.linkedin.com/company/marriott-international
 apis:
-  - aid: marriott-international:developer-api
-    name: Marriott Developer API
-    tags:
-      - Hospitality
-      - Hotels
-      - Reservations
-      - Travel
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://devportalprod.marriott.com
-    humanURL: https://devportalprod.marriott.com/
-    properties:
-      - url: https://devportalprod.marriott.com/apis
-        type: Documentation
-      - url: openapi/marriott-international-developer-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Marriott Developer API provides programmatic access to Marriott International's hotel and property systems
-      through a developer portal. The API catalog enables integration with Marriott's Central Reservation System (CRS)
-      for property search, availability lookup, and booking management across Marriott's portfolio of hotel brands
-      worldwide.
+- aid: marriott-international:marriott-international-availability-api
+  name: Marriott International Availability API
+  description: Check room availability and rates.
+  humanURL: https://devportalprod.marriott.com/
+  baseURL: https://devportalprod.marriott.com
+  tags:
+  - Availability
+  properties:
+  - type: OpenAPI
+    url: openapi/marriott-international-availability-api-openapi.yml
+  - type: Documentation
+    url: https://devportalprod.marriott.com/apis
+- aid: marriott-international:marriott-international-properties-api
+  name: Marriott International Properties API
+  description: Search and retrieve hotel property information.
+  humanURL: https://devportalprod.marriott.com/
+  baseURL: https://devportalprod.marriott.com
+  tags:
+  - Properties
+  properties:
+  - type: OpenAPI
+    url: openapi/marriott-international-properties-api-openapi.yml
+  - type: Documentation
+    url: https://devportalprod.marriott.com/apis
+- aid: marriott-international:marriott-international-reservations-api
+  name: Marriott International Reservations API
+  description: Create and manage hotel reservations.
+  humanURL: https://devportalprod.marriott.com/
+  baseURL: https://devportalprod.marriott.com
+  tags:
+  - Reservations
+  properties:
+  - type: OpenAPI
+    url: openapi/marriott-international-reservations-api-openapi.yml
+  - type: Documentation
+    url: https://devportalprod.marriott.com/apis
 description: >-
   Marriott International is a global lodging company with a portfolio of more than 30 brands and thousands of properties
   across luxury, premium, select, and longer-stay hotel categories.
