@@ -1,0 +1,18 @@
+{
+  "provider": "marriott-international",
+  "sources": [
+    "marriott-international-availability-api-openapi.yml",
+    "marriott-international-properties-api-openapi.yml",
+    "marriott-international-reservations-api-openapi.yml"
+  ],
+  "outputs": [
+    "marriott-international-availability-api-openapi.yml",
+    "marriott-international-properties-api-openapi.yml",
+    "marriott-international-reservations-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
