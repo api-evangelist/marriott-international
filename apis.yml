@@ -1,4 +1,5 @@
 aid: marriott-international
+specificationVersion: '0.23'
 accessModel:
   pricing: unknown
   onboarding: self-serve
