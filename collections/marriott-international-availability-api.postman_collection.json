@@ -1,0 +1,132 @@
+{
+  "item": [
+    {
+      "id": "aa6f795d-bcaf-4f2f-afc3-138b656f5117",
+      "name": "Availability",
+      "description": {
+        "content": "Check room availability and rates.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a9039364-cc12-462a-bf5e-5334ef2af9f2",
+          "name": "Check room availability",
+          "request": {
+            "name": "Check room availability",
+            "description": {
+              "content": "Check room availability and rates for a specified property and date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "availability"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "propertyId",
+                  "value": "<string>",
+                  "description": "(Required) The unique property identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "checkIn",
+                  "value": "<date>",
+                  "description": "(Required) Check-in date."
+                },
+                {
+                  "disabled": false,
+                  "key": "checkOut",
+                  "value": "<date>",
+                  "description": "(Required) Check-out date."
+                },
+                {
+                  "disabled": false,
+                  "key": "guests",
+                  "value": "<integer>",
+                  "description": "Number of guests."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c6e4f3bc-8ccb-44a1-b27c-4589df608a6f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "propertyId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "checkIn",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "checkOut",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "guests",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://devportalprod.marriott.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "73dcf1c0-8d19-49ae-b549-7c09849d6e3b",
+    "name": "Marriott Developer Availability API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Marriott Developer API provides programmatic access to Marriott International's hotel and property systems. The API enables integration with Marriott's Central Reservation System for property search, availability lookup, and booking management across Marriott's portfolio of hotel brands worldwide.",
+      "type": "text/plain"
+    }
+  }
+}

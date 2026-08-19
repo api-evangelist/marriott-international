@@ -1,0 +1,189 @@
+{
+  "item": [
+    {
+      "id": "e7074596-165e-4b8a-a1f4-8d8bdbbefbb4",
+      "name": "Reservations",
+      "description": {
+        "content": "Create and manage hotel reservations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "01b5cf4a-41f0-4bb4-bde9-80babb8c2ed1",
+          "name": "Create a reservation",
+          "request": {
+            "name": "Create a reservation",
+            "description": {
+              "content": "Creates a new hotel reservation at a specified Marriott property.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reservations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"propertyId\": \"<string>\",\n  \"checkIn\": \"<date>\",\n  \"checkOut\": \"<date>\",\n  \"roomType\": \"<string>\",\n  \"guestName\": \"<string>\",\n  \"guests\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "da8c3b61-d7f3-4776-922f-50b96077acb2",
+              "name": "Reservation created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"propertyId\": \"<string>\",\n  \"checkIn\": \"<date>\",\n  \"checkOut\": \"<date>\",\n  \"roomType\": \"<string>\",\n  \"guestName\": \"<string>\",\n  \"guests\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5c4b7137-33e7-4cc6-937d-7999e612095f",
+          "name": "Get reservation details",
+          "request": {
+            "name": "Get reservation details",
+            "description": {
+              "content": "Retrieves details of a specific reservation by confirmation number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reservations",
+                ":confirmationNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "confirmationNumber",
+                  "description": "(Required) The reservation confirmation number."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4afa9cd9-935b-4613-9e08-1d003d9da338",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    ":confirmationNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "confirmationNumber",
+                      "description": "(Required) The reservation confirmation number."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://devportalprod.marriott.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6b2f59b8-6997-4a01-b4e6-5013a0597f45",
+    "name": "Marriott Developer Availability Reservations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Marriott Developer API provides programmatic access to Marriott International's hotel and property systems. The API enables integration with Marriott's Central Reservation System for property search, availability lookup, and booking management across Marriott's portfolio of hotel brands worldwide.",
+      "type": "text/plain"
+    }
+  }
+}

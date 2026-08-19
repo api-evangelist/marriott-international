@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Marriott Developer Availability Reservations API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reservations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://devportalprod.marriott.com/reservations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new hotel reservation at a specified Marriott property."
+        },
+        {
+          "info": {
+            "name": "Get reservation details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://devportalprod.marriott.com/reservations/:confirmationNumber",
+            "params": [
+              {
+                "name": "confirmationNumber",
+                "value": "",
+                "type": "path",
+                "description": "The reservation confirmation number."
+              }
+            ]
+          },
+          "docs": "Retrieves details of a specific reservation by confirmation number."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

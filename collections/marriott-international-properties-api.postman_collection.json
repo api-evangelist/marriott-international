@@ -1,0 +1,198 @@
+{
+  "item": [
+    {
+      "id": "19296ec3-636a-483a-b231-8b84af0fb2e8",
+      "name": "Properties",
+      "description": {
+        "content": "Search and retrieve hotel property information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "55a91578-ea9f-40da-9db9-ecd1a524d475",
+          "name": "Search properties",
+          "request": {
+            "name": "Search properties",
+            "description": {
+              "content": "Search for Marriott hotel properties by location, brand, amenities, and other criteria across the global portfolio.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "properties"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<string>",
+                  "description": "City or geographic location to search."
+                },
+                {
+                  "disabled": false,
+                  "key": "brand",
+                  "value": "<string>",
+                  "description": "Filter by Marriott brand code."
+                },
+                {
+                  "disabled": false,
+                  "key": "radius",
+                  "value": "<number>",
+                  "description": "Search radius in miles."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e8c5cb56-4619-48c2-9b5c-d50915454b09",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "properties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "brand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3846b245-c942-4138-9468-e0edb3d9d88b",
+          "name": "Get property details",
+          "request": {
+            "name": "Get property details",
+            "description": {
+              "content": "Retrieves detailed information about a specific Marriott hotel property including amenities, location, and contact details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "properties",
+                ":propertyId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "propertyId",
+                  "description": "(Required) The unique property identifier."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "04114252-d32e-4aac-ab0f-2b570af26a45",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "properties",
+                    ":propertyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "propertyId",
+                      "description": "(Required) The unique property identifier."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://devportalprod.marriott.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "da6f1e0a-4ce9-4a00-84da-d41a20ed825b",
+    "name": "Marriott Developer Availability Properties API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Marriott Developer API provides programmatic access to Marriott International's hotel and property systems. The API enables integration with Marriott's Central Reservation System for property search, availability lookup, and booking management across Marriott's portfolio of hotel brands worldwide.",
+      "type": "text/plain"
+    }
+  }
+}
